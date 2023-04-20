@@ -1,34 +1,60 @@
 <template>
-  <div>
-    <header>
-    </header>
+<header>
+</header>
 
-    <auth />
-  </div>
+<div>
+
+    <Auth />
+</div>
 </template>
 
 <script>
-import { RouterLink } from 'vue-router'
-import Auth from './views/Auth.vue'
+import { mapActions, mapState } from 'pinia';
+import UserStore from '@/stores/user';
+import Auth from '@/views/Auth/Auth.vue';
 
 export default {
   name: 'App',
   components: {
-    RouterLink,
     Auth,
   },
-  methods: {
-    handleLogout() {
-      this.$supabase.auth.signOut()
-        .then(() => {
-          this.$router.push('/auth/login');
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    },
+  computed: {
+...mapState(UserStore, ['user'])
   },
+
+  methods: {
+    ...mapActions(UserStore, ['fetchUser']),
+    checkUserExists() {
+      console.log(this.user)
+      if (this.user) {
+        this.$router.push({ path:'/'});
+      } else {
+        this.$router.push({path:'/auth/sign-in'});
+      }
+      }
+    },
+
+  async created() {
+try {
+  await this.fetchUser();
+} catch (e) {
+  console.error(e);
+  this.checkUserExists()
+
 }
+},
+watch: {
+user() {
+  if (this.user)
+ {
+  this.$router.push({path:'/'});
+ } else {
+  this.$router.push({path:'/Auth/Sign-in'});
+ }
+ }}
+}
+
+
 </script>
 
 <style scoped>

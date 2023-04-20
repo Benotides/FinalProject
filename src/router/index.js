@@ -1,15 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Auth from "../views/Auth.vue";
+import Auth from "../views/Auth/Auth.vue";
 import Home from "../views/Home.vue";
-import SignIn from "../components/SignIn.vue";
-import SignUp from "../components/SignUp.vue";
-import Nav from "@/components/Nav.vue";
-import { supabase } from "../supabase/index.js";
-
-const isAuthenticated = () => {
-  const user = supabase.auth.user();
-  return user !== null;
-};
+import SignIn from "../views/Auth/SignIn.vue";
+import SignUp from "../views/Auth/SignUp.vue";
 
 const routes = [
   {
@@ -25,13 +18,7 @@ const routes = [
     path: "/",
     name: "Home",
     component: Home,
-    beforeEnter: (to, from, next) => {
-      if (isAuthenticated()) {
-        next();
-      } else {
-        next("/auth/login");
-      }
-    },
+    
   },
 ];
 
@@ -41,4 +28,3 @@ const router = createRouter({
 });
 
 export default router;
-

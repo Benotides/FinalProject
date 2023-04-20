@@ -14,16 +14,14 @@
 </template>
 
 <script>
-import {
-    RouterLink
-} from 'vue-router'
-import SignIn from "@/components/SignIn.vue";
-import SignUp from "@/components/SignUp.vue";
+
+import SignIn from "../Auth/SignIn.vue";
+import SignUp from "../Auth/SignUp.vue";
 
 export default {
     name: 'Auth',
     components: {
-        RouterLink,
+    
         SignIn,
         SignUp,
       
@@ -44,7 +42,7 @@ header {
 }
 
 header h1 {
-    color: #9d8e3f;
+    color: whitesmoke;
     font-family: 'aniron', sans-serif;
     font-size: 2.5rem;
     margin: 0;

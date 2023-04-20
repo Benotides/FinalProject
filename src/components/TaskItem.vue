@@ -9,7 +9,7 @@ import ToDoStore from '../stores/tasks';
 import {mapActions,mapState } from 'pinia' ;
 
 export default {
-name: 'TaskItem'
+name: 'TaskItem',
 computed: {
 ...mapState(ToDoStore, ['tasksList'])
 },
@@ -21,7 +21,7 @@ created() {
     this._fetchAllTasks()
 },
 mounted() {
-    this._addNewTask({title: 'New task', user_id: })
+    this._addNewTask({title: 'New task', user_id: 123});
 }
 }
 </script>
